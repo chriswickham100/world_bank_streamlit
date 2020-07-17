@@ -27,19 +27,44 @@ for item in page_num:
     api = "http://api.worldbank.org/v2/country/?format=json&page=" + str(item)
     data = requests.get(api).json()[1]
     all_country_data.append(data)
+  
+# This is flattens the .json to create a single .json of all country data, country_data
     
-country_list = []
+country_data = []
 
 for page in all_country_data:
     for item in page:
-        country_list.append(item)
-                
+        country_data.append(item)
+             
+# Creating a list of country names, country_names  
+        
 country_names = []
 
-for country in country_list:
+for country in country_data:
     country_names.append(country["name"])
     
-print(country_names)
+# Creating a multiselect tool for selecting countries   
+    
+selected_country_data = []
+    
+selected_countries = st.multiselect("Choose your country",country_names)
 
-st.multiselect("Choose your country",country_names)
+# Showing the results of the multiselect tool:
+
+#THIS IS BUGGY - SOMETHING's HAPPENING HERE decided to walk away and come back
+
+for country in country_data:
+    print("COUNTRY",country)
+    for selected_country in selected_countries:
+        print("SELECTED_COUNTRY",selected_country)
+        if country['name'] == selected_country:
+            print("THIS IS SELECTED COUNTRY NAME",country['name'])
+            print("THIS IS SELECTED COUNTRY DATA",country)
+            selected_country_data = selected_country_data.append(country)
+            
+if selected_countries != []:
+    st.write("This is the json containing data for the countries you've chosen:", selected_countries)
+            
+st.write(selected_country_data)
+            
 
