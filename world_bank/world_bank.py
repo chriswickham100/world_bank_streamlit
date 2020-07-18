@@ -8,6 +8,7 @@ Created on Fri Jul 17 15:41:46 2020
 
 import streamlit as st
 import requests
+import pandas as pd
 import json
 
 st.write("This is my World Bank streamlit app")
@@ -35,6 +36,15 @@ country_data = []
 for page in all_country_data:
     for item in page:
         country_data.append(item)
+        
+for category in ['region','adminregion','incomeLevel','lendingType']:
+    for country in country_data:
+        if type(country[category]) != str:
+            country[category] = country[category]["value"]            
+
+st.write(country_data)
+        
+
              
 # Creating a list of country names, country_names  
         
@@ -49,22 +59,26 @@ selected_country_data = []
     
 selected_countries = st.multiselect("Choose your country",country_names)
 
+#country_data = pd.read_json(json.dumps(country_data))
+
+st.write(country_data)
+
 # Showing the results of the multiselect tool:
 
 #THIS IS BUGGY - SOMETHING's HAPPENING HERE decided to walk away and come back
 
-for country in country_data:
-    print("COUNTRY",country)
-    for selected_country in selected_countries:
-        print("SELECTED_COUNTRY",selected_country)
-        if country['name'] == selected_country:
-            print("THIS IS SELECTED COUNTRY NAME",country['name'])
-            print("THIS IS SELECTED COUNTRY DATA",country)
-            selected_country_data = selected_country_data.append(country)
-            
-if selected_countries != []:
-    st.write("This is the json containing data for the countries you've chosen:", selected_countries)
-            
-st.write(selected_country_data)
-            
+#for country in country_data:
+#    print("COUNTRY",country)
+#    for selected_country in selected_countries:
+#        print("SELECTED_COUNTRY",selected_country)
+#        if country['name'] == selected_country:
+#            print("THIS IS SELECTED COUNTRY NAME",country['name'])
+#            print("THIS IS SELECTED COUNTRY DATA",country)
+#            selected_country_data = selected_country_data.append(country)
+#            
+#if selected_countries != []:
+#    st.write("This is the json containing data for the countries you've chosen:", selected_countries)
+#            
+#st.write(selected_country_data)
+#            
 
