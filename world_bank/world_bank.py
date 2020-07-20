@@ -10,8 +10,9 @@ import streamlit as st
 import requests
 import pandas as pd
 import json
+import numpy as np
 
-st.write("This is my World Bank streamlit app")
+st.markdown("**World Bank Data Scraper and Visualizer**")
 
 # For World bank country API documentation, see: 
 # https://datahelpdesk.worldbank.org/knowledgebase/articles/898590-country-api-queries
@@ -49,6 +50,59 @@ country_data = pd.read_json(json.dumps(country_data))
 selected_countries = st.multiselect("Choose your country",country_data["name"])
 
 if selected_countries != []:
-    st.write("This is the raw data for the country you've selected:",country_data[country_data["name"].isin(selected_countries)])
-          
+    selected_country_data = country_data[country_data["name"].isin(selected_countries)]
+    print(selected_country_data.dtypes)
+    st.write("These are the raw data for the country you've selected:")
+    st.dataframe(selected_country_data)
 
+          
+    map_data = pd.DataFrame({
+        'countries' : selected_country_data["name"],
+        'lat' : pd.to_numeric(selected_country_data["latitude"]),
+        'lon' : pd.to_numeric(selected_country_data["longitude"])
+    })
+
+# Adding code so we can have map default to the center of the data
+    midpoint = (np.average(map_data['lat']), np.average(map_data['lon']))
+    
+    st.deck_gl_chart(
+                viewport={
+                    'latitude': midpoint[0],
+                    'longitude':  midpoint[1],
+                    'zoom': 4
+                },
+                layers=[{
+                    'type': 'ScatterplotLayer',
+                    'data': map_data,
+                    'radiusScale': 250,
+       'radiusMinPixels': 5,
+                    'getFillColor': [248, 24, 148],
+                }]
+            )
+
+#
+#data = pd.DataFrame({
+#    'awesome cities' : ['Chicago', 'Minneapolis', 'Louisville', 'Topeka'],
+#    'lat' : [41.868171, 44.979840,  38.257972, 39.030575],
+#    'lon' : [-87.667458, -93.272474, -85.765187,  -95.702548]
+#})
+#
+## Adding code so we can have map default to the center of the data
+#midpoint = (np.average(data['lat']), np.average(data['lon']))
+#
+#print(data.dtypes)
+#
+#st.deck_gl_chart(
+#            viewport={
+#                'latitude': midpoint[0],
+#                'longitude':  midpoint[1],
+#                'zoom': 4
+#            },
+#            layers=[{
+#                'type': 'ScatterplotLayer',
+#                'data': data,
+#                'radiusScale': 250,
+#   'radiusMinPixels': 5,
+#                'getFillColor': [248, 24, 148],
+#            }]
+#        )
