@@ -54,7 +54,6 @@ selected_countries = st.multiselect("Choose your country",country_data["name"])
 
 if selected_countries != []:
     selected_country_data = country_data[country_data["name"].isin(selected_countries)]
-    print(selected_country_data.dtypes)
     st.write("These are the raw data for the country you've selected:")
     st.dataframe(selected_country_data)
 
@@ -65,12 +64,24 @@ if selected_countries != []:
         'lon' : pd.to_numeric(selected_country_data["longitude"])
     })
     
-    regions = map_data[map_data["lat"] == ""]
+    print("map_data['lat']",map_data["lat"])
     
-    if regions.shape[0] != 0:
-        st.write("The World bank API doesn't provide location data for regions like",regions["name"],", only countries")
+    regions = map_data[map_data["lat"].isna()]
+    
+    print("REGIONS", regions)
+    
+    print("REGIONS SHAPE", regions.shape[0])
+    
+    print("Regions.dtype",regions.dtypes)
+    
+    # SO THIS IS STILL BUGGY BUT I'M NOT MAKING PROGRESS- JUST COME BACK SO THAT
+    # THE GOAL SHOULD BE CHOOSE A COUNTRY AND IT SHOWS UP ON THE MAP, CHOOSE A REGION
+    # AND IT SHOWS THAT REGION NOT SHOWING UP
+    
+    if regions.shape != 0:
+        st.write("The World bank API doesn't provide location data for regions, only countries")
         
-    map_data[map_data["lat"] != 0]
+    map_data = map_data[map_data["lat"].notnull()]
 
 # Adding code so we can have map default to the center of the data
     midpoint = (np.average(map_data['lat']), np.average(map_data['lon']))
