@@ -64,6 +64,13 @@ if selected_countries != []:
         'lat' : pd.to_numeric(selected_country_data["latitude"]),
         'lon' : pd.to_numeric(selected_country_data["longitude"])
     })
+    
+    regions = map_data[map_data["lat"] == ""]
+    
+    if regions.shape[0] != 0:
+        st.write("The World bank API doesn't provide location data for regions like",regions["name"],", only countries")
+        
+    map_data[map_data["lat"] != 0]
 
 # Adding code so we can have map default to the center of the data
     midpoint = (np.average(map_data['lat']), np.average(map_data['lon']))
