@@ -84,3 +84,6 @@ if selected_countries != []:
                     'getFillColor': [248, 24, 148],
                 }]
             )
+    
+if st.button('Do you want to display wealth data?'):
+    st.write("Fine, you greedy betch")
