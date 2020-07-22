@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Fri Jul 17 15:41:46 2020
-
 @author: chriswickham
 """
 
@@ -47,7 +44,13 @@ for category in ['region','adminregion','incomeLevel','lendingType']:
             country[category] = country[category]["value"]            
                         
 country_data = pd.read_json(json.dumps(country_data))
-    
+
+# Eliminating regions based on location data
+
+country_data = country_data[country_data['longitude'] != ""]
+
+country_data = country_data.reset_index()
+
 # Creating a multiselect tool for selecting countries   
     
 selected_countries = st.multiselect("Choose your country",country_data["name"])
@@ -63,25 +66,6 @@ if selected_countries != []:
         'lat' : pd.to_numeric(selected_country_data["latitude"]),
         'lon' : pd.to_numeric(selected_country_data["longitude"])
     })
-    
-    print("map_data['lat']",map_data["lat"])
-    
-    regions = map_data[map_data["lat"].isna()]
-    
-    print("REGIONS", regions)
-    
-    print("REGIONS SHAPE", regions.shape[0])
-    
-    print("Regions.dtype",regions.dtypes)
-    
-    # SO THIS IS STILL BUGGY BUT I'M NOT MAKING PROGRESS- JUST COME BACK SO THAT
-    # THE GOAL SHOULD BE CHOOSE A COUNTRY AND IT SHOWS UP ON THE MAP, CHOOSE A REGION
-    # AND IT SHOWS THAT REGION NOT SHOWING UP
-    
-    if regions.shape != 0:
-        st.write("The World bank API doesn't provide location data for regions, only countries")
-        
-    map_data = map_data[map_data["lat"].notnull()]
 
 # Adding code so we can have map default to the center of the data
     midpoint = (np.average(map_data['lat']), np.average(map_data['lon']))
