@@ -85,5 +85,8 @@ if selected_countries != []:
                 }]
             )
     
-if st.button('Do you want to display wealth data?'):
+# Continuing to display widgets with this button here: 
+# https://docs.streamlit.io/en/stable/api.html#display-interactive-widgets
+
+if st.button('Select to display wealth data?'):
     st.write("Fine, you greedy betch")
