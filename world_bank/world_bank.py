@@ -91,9 +91,9 @@ if selected_countries != []:
 # So I'd love it to stay once you click once -- is that a cache-ing issue?
 # Caching seems important to figure out at some point 
     
-# 
-
-if st.checkbox('Select to display wealth data'):
-    st.markdown("**FINE YOU GREEDY BETCH**")
-    if st.button('Select to display wealth data?'):
-        st.write("Gugh, you're so superficial")
+if st.checkbox('If I wanted a sugar daddy yes I could go out and get one because I am what?'):
+    st.markdown("**SICKENING**")
+    if st.button("Baby everything I have I worked for, I've gotten myself I've built myself from the ground up."):
+        st.write("F*CKING BTCH!")
+        import streamlit as st
+        st.markdown("![Alt Text](https://media1.tenor.com/images/82c4d73ec7945f07129b97414e345d8b/tenor.gif?itemid=8144056)")
