@@ -1,3 +1,3 @@
 # World Bank Country Data
 
-This streamlit app will allow users to select countries and explore relevant data from the World Bank Open Data Hub.
+This repository contains a number of applications that import data using the World Bank Public API and present it using streamlit. 
