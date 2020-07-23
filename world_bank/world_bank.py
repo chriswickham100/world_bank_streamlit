@@ -93,7 +93,7 @@ if selected_countries != []:
     
 # 
 
-if st.button('Select to display wealth data?'):
-    st.write("Gugh, you're so superficial")
-    if st.checkbox('Select to display wealth data'):
-        st.markdown("**FINE YOU GREEDY BETCH**")
+if st.checkbox('Select to display wealth data'):
+    st.markdown("**FINE YOU GREEDY BETCH**")
+    if st.button('Select to display wealth data?'):
+        st.write("Gugh, you're so superficial")
