@@ -88,5 +88,12 @@ if selected_countries != []:
 # Continuing to display widgets with this button here: 
 # https://docs.streamlit.io/en/stable/api.html#display-interactive-widgets
 
+# So I'd love it to stay once you click once -- is that a cache-ing issue?
+# Caching seems important to figure out at some point 
+    
+# 
+
 if st.button('Select to display wealth data?'):
-    st.write("Fine, you greedy betch")
+    st.write("Gugh, you're so superficial")
+    if st.checkbox('Select to display wealth data'):
+        st.markdown("**FINE YOU GREEDY BETCH**")
