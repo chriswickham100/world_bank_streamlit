@@ -93,7 +93,7 @@ if selected_countries != []:
     
 if st.checkbox('If I wanted a sugar daddy yes I could go out and get one because I am what?'):
     st.markdown("**SICKENING**")
-    if st.button("Baby everything I have I worked for, I've gotten myself I've built myself from the ground up."):
-        st.write("F*CKING BTCH!")
+    if st.button("You could NEVER have a sugar daddy because you're not that type of girl."):
+        st.write("Baby everything I have I worked for, I've gotten myself I've built myself from the ground up.")
         import streamlit as st
         st.markdown("![Alt Text](https://media1.tenor.com/images/82c4d73ec7945f07129b97414e345d8b/tenor.gif?itemid=8144056)")
