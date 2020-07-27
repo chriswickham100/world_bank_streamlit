@@ -1,5 +1,9 @@
 # This is a reference script for all of the World Bank API's 
 
+# Maybe build an API builder by working through this: 
+# https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information
+
+
 # Country API's: 
 
 import requests
@@ -31,6 +35,8 @@ def countries_api():
     country_data = pd.read_json(json.dumps(country_data))
     
     return(country_data)
+    
+
     
 if __name__ == "__main__": 
     print(countries_api())
